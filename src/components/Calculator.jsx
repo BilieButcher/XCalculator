@@ -8,8 +8,10 @@ const Calc = () => {
  const [result, setResult] = useState("");
 
  const handle = (e) =>{
+    
     // console.log(e.target.innerHTML)
-    setEquation(equation + e.target.innerHTML);
+    setEquation(equation + e.target.innerHTML.split(" ").join(""));
+    
  }
 
  const clear = () => {
@@ -20,13 +22,14 @@ const Calc = () => {
  const handleOperators = (e) => {
     if(equation.charAt(equation.length-1) === e.target.innerHTML){
         setEquation(equation.slice(0,-1));
-        setEquation(equation + e.target.innerHTML);
+        setEquation(equation + e.target.innerHTML.split(" ").join(""));
     }else{
-        setEquation(equation + e.target.innerHTML);
+        setEquation(equation + e.target.innerHTML.split(" ").join(""));
     }
  }
 
  const operation = () => {
+    setEquation(equation.split(" ").join(""))
     if(equation === ""){
         setResult("Error");
     }else if(isNaN(eval(equation.replace(/\s/g, '')))){
