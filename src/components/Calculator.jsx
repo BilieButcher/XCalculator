@@ -14,7 +14,7 @@ const Calc = () => {
 
  const clear = () => {
     setEquation("");
-    setResult();
+    setResult("");
  }
 
  const handleOperators = (e) => {
@@ -29,9 +29,9 @@ const Calc = () => {
  const operation = () => {
     if(equation === ""){
         setResult("Error");
-    }else if(isNaN(eval(equation))){
+    }else if(isNaN(eval(equation.replace(/\s/g, '')))){
         setResult("NaN")
-    }else if(!isFinite(eval(equation))){
+    }else if(!isFinite(eval(equation.replace(/\s/g, '')))){
         setResult("Infinity")   
     }
     
@@ -39,7 +39,7 @@ const Calc = () => {
     
     else{
 
-    const answer = eval(equation);
+    const answer = eval(equation.replace(/\s/g, ''));
     setResult(answer);
     }
  }
@@ -47,7 +47,7 @@ const Calc = () => {
     return (
         <div>
         <h1>React Calculator</h1><br/>
-        <input  value={equation}/><br/><br/><br/>
+        <input type="text" value={equation}/><br/><br/><br/>
         <div className="result">
             {result ? <p>{result}</p> : <br/>}
         </div>
